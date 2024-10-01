@@ -41,7 +41,7 @@ while True:
         while True:
             temp = []
             #Check if the user has input "/" to cancel enciphering or not
-            if bck == True:
+            if bck:
                 break
             chr = [*input("Type your string: ")]
             while True:
@@ -60,7 +60,7 @@ while True:
     elif cmd == "d" or cmd ==" D":
         while True:
             temp = []
-            if bck == True:
+            if bck:
                 break
             chr = [*input("Type your enciphered string: ")]
             while True:
