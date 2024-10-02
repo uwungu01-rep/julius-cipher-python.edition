@@ -75,6 +75,6 @@ while True:
                 else:
                     print("Input has to be an interger from 1 to 25.")
     elif cmd == "/":
-        break
+        exit()
     else:
         print("Command doesn't exist.")
