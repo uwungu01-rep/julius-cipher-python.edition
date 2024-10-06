@@ -5,7 +5,7 @@ def sort():
     #Sorting algorithm, take the last characters in the alp/alpup and put it at the start of the cip/cipup for a ceratian almount of times, decided by shf
     #The rest of the alp/alpup get put into cip/cipup without any change
     for k in range(int(shf), len(alp) + int(shf)):
-        if k in range(len(alp)):
+        if k < len(alp):
             cip.append(alp[k])
             cipup.append(alpup[k])
         else:
