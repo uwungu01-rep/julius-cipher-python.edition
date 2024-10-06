@@ -37,18 +37,14 @@ def decipher(alp, cip, cipup, alpup, chr):
     return oupt
 
 while True:
-    bck = False
+    bck = True
+    chk = False
     cmd = input("Type e for enciphering, type d for deciphering (case insensitive). Type / to end the program: ")
     if cmd == "e" or cmd == "E":
         while True:
             #Check if the user has input "/" to cancel enciphering or not
             if bck:
-                break
-            chr = [*input("Type your string: ")]
-            if len(chr) == 0:
-                print("Input cannot be empty.")
-            else:
-                chk = False
+                chr = [*input("Type your string: ")]
                 for k in chr:
                     if k != " ":
                         chk = True
@@ -61,23 +57,20 @@ while True:
                             sort()
                             print("Output:", encipher(alp, cip, alpup, cipup, chr))
                         elif shf == "/":
-                            bck = True
+                            bck = False
                             break
                         else:
                             print("Input has to be an interger from 1 to 25.")
                 else:
                     print("Input cannot be empty.")
+            else:
+                break
                 
     #This elif block essentially do the same thing as the if block above
     elif cmd == "d" or cmd ==" D":
         while True:
             if bck:
-                break
-            chr = [*input("Type your string: ")]
-            if len(chr) == 0:
-                print("Input cannot be empty.")
-            else:
-                chk = False
+                chr = [*input("Type your string: ")]
                 for k in chr:
                     if k != " ":
                         chk = True
@@ -90,12 +83,14 @@ while True:
                             sort()
                             print("Output:", decipher(alp, cip, cipup, alpup, chr))
                         elif shf == "/":
-                            bck = True
+                            bck = False
                             break
                         else:
                             print("Input has to be an interger from 1 to 25.")
                 else:
                     print("Input cannot be empty.")
+            else:
+                break
 
     elif cmd == "/":
         exit()
