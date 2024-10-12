@@ -44,7 +44,7 @@ while True:
         while True:
             #Check if the user has input "/" to cancel enciphering or not
             if bck:
-                chr = [*input("Type your string: ")]
+                chr = [*input("Your input: ")]
                 if len([x for x in chr if x != " "]) != 0:
                     while True:
                         cip, cipup = [], []
@@ -66,7 +66,7 @@ while True:
     elif cmd == "d" or cmd ==" D":
         while True:
             if bck:
-                chr = [*input("Type your string: ")]
+                chr = [*input("Your input: ")]
                 if len([x for x in chr if x != " "]) != 0:
                     while True:
                         cip, cipup = [], []
