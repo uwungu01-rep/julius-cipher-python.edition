@@ -45,11 +45,7 @@ while True:
             #Check if the user has input "/" to cancel enciphering or not
             if bck:
                 chr = [*input("Type your string: ")]
-                for k in chr:
-                    if k != " ":
-                        chk = True
-                        break
-                if chk:
+                if len([x for x in chr if x != " "]) != 0:
                     while True:
                         cip, cipup = [], []
                         shf = input("Shift (from 1 to 25) (type / to cancel): ")
@@ -71,11 +67,7 @@ while True:
         while True:
             if bck:
                 chr = [*input("Type your string: ")]
-                for k in chr:
-                    if k != " ":
-                        chk = True
-                        break
-                if chk:
+                if len([x for x in chr if x != " "]) != 0:
                     while True:
                         cip, cipup = [], []
                         shf = input("Shift (from 1 to 25) (type / to cancel): ")
