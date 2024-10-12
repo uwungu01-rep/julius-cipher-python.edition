@@ -38,7 +38,6 @@ def decipher(alp, cip, cipup, alpup, chr):
 
 while True:
     bck = True
-    chk = False
     cmd = input("Type e for enciphering, type d for deciphering (case insensitive). Type / to end the program: ")
     if cmd == "e" or cmd == "E":
         while True:
@@ -56,7 +55,7 @@ while True:
                             bck = False
                             break
                         else:
-                            print("Input has to be an interger from 1 to 25.")
+                            print("Input has to be an integer from 1 to 25.")
                 else:
                     print("Input cannot be empty.")
             else:
@@ -78,7 +77,7 @@ while True:
                             bck = False
                             break
                         else:
-                            print("Input has to be an interger from 1 to 25.")
+                            print("Input has to be an integer from 1 to 25.")
                 else:
                     print("Input cannot be empty.")
             else:
