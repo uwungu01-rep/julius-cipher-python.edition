@@ -40,7 +40,7 @@ def decipher(alp, cip, cipup, alpup, chr):
 
 while True:
     bck = True
-    cmd = input("Type e for enciphering, type d for deciphering (case insensitive). Type / to end the program: ")
+    cmd = input("Type E for enciphering, type D for deciphering (case insensitive). Type / to end the program: ")
     if cmd == "e" or cmd == "E":
         while True:
             #Check if the user has input "/" to cancel enciphering or not
@@ -50,7 +50,7 @@ while True:
                     while True:
                         cip, cipup = [], []
                         shf = input("Shift (type / to cancel): ")
-                        if "".join([x for x in shf if x != "-"]).isnumeric() and [x for x in shf].index("-") == 0:
+                        if shf.isnumeric() or "-" in [x for x in shf] and [x for x in shf].index("-") == 0:
                             shf = int(shf)%26
                             sort()
                             print(f"Output: {encipher(alp, cip, alpup, cipup, chr)}")
@@ -73,7 +73,7 @@ while True:
                     while True:
                         cip, cipup = [], []
                         shf = input("Shift (type / to cancel): ")
-                        if "".join([x for x in shf if x != "-"]).isnumeric() and [x for x in shf].index("-") == 0:
+                        if shf.isnumeric() or "-" in [x for x in shf] and [x for x in shf].index("-") == 0:
                             shf = int(shf)%26
                             sort()
                             print(f"Output: {decipher(alp, cip, cipup, alpup, chr)}")
