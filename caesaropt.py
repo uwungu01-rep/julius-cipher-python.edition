@@ -51,7 +51,7 @@ while True:
                         cip, cipup = [], []
                         shf = input("Shift (type / to cancel): ")
                         if shf.isnumeric() or "-" in [x for x in shf] and [x for x in shf].index("-") == 0:
-                            shf = int(shf)%26
+                            shf = int(shf) % 26
                             sort()
                             print(f"Output: {encipher(alp, cip, alpup, cipup, chr)}")
                         elif shf == "/":
@@ -74,7 +74,7 @@ while True:
                         cip, cipup = [], []
                         shf = input("Shift (type / to cancel): ")
                         if shf.isnumeric() or "-" in [x for x in shf] and [x for x in shf].index("-") == 0:
-                            shf = int(shf)%26
+                            shf = int(shf) % 26
                             sort()
                             print(f"Output: {decipher(alp, cip, cipup, alpup, chr)}")
                         elif shf == "/":
