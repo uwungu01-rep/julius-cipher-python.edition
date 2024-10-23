@@ -1,16 +1,17 @@
-import string       
+import string
 alpup, alp = [*string.ascii_uppercase], [*string.ascii_lowercase]
 
 def sort():
     #Sorting algorithm, take the last characters in the alp/alpup and put it at the start of the cip/cipup for a ceratian almount of times, decided by shf
     #The rest of the alp/alpup get put into cip/cipup without any change
-    for k in range(int(shf), len(alp) + int(shf)):
+    for k in range(shf, len(alp) + shf):
         if k < len(alp):
             cip.append(alp[k])
             cipup.append(alpup[k])
-        else:
-            cip.append(alp[abs(k - len(alp))])
-            cipup.append(alpup[abs(k - len(alp))])
+            continue
+
+        cip.append(alp[abs(k - len(alp))])
+        cipup.append(alpup[abs(k - len(alp))])
 
 def encipher(alp, cip, alpup, cipup, chr):
     oupt = ""
@@ -18,10 +19,11 @@ def encipher(alp, cip, alpup, cipup, chr):
     for k in chr:
         if k in alp:
             oupt += cip[alp.index(k)]
+            continue
         elif k in alpup:
             oupt += cipup[alpup.index(k)]
-        else:
-            oupt += k
+            continue
+        oupt += k
     return oupt
  
 def decipher(alp, cip, cipup, alpup, chr):
@@ -47,15 +49,16 @@ while True:
                 if len([x for x in chr if x != " "]) != 0:
                     while True:
                         cip, cipup = [], []
-                        shf = input("Shift (from 1 to 25) (type / to cancel): ")
-                        if shf.isnumeric() == True and 1 <= int(shf) <= 25:
+                        shf = input("Shift (type / to cancel): ")
+                        if "".join([x for x in shf if x != "-"]).isnumeric() and [x for x in shf].index("-") == 0:
+                            shf = int(shf)%26
                             sort()
-                            print("Output:", encipher(alp, cip, alpup, cipup, chr))
+                            print(f"Output: {encipher(alp, cip, alpup, cipup, chr)}")
                         elif shf == "/":
                             bck = False
                             break
                         else:
-                            print("Input has to be an integer from 1 to 25.")
+                            print("Input has to be an integer.")
                 else:
                     print("Input cannot be empty.")
             else:
@@ -69,15 +72,16 @@ while True:
                 if len([x for x in chr if x != " "]) != 0:
                     while True:
                         cip, cipup = [], []
-                        shf = input("Shift (from 1 to 25) (type / to cancel): ")
-                        if shf.isnumeric() == True and 1 <= int(shf) <= 25:
+                        shf = input("Shift (type / to cancel): ")
+                        if "".join([x for x in shf if x != "-"]).isnumeric() and [x for x in shf].index("-") == 0:
+                            shf = int(shf)%26
                             sort()
-                            print("Output:", decipher(alp, cip, cipup, alpup, chr))
+                            print(f"Output: {decipher(alp, cip, cipup, alpup, chr)}")
                         elif shf == "/":
                             bck = False
                             break
                         else:
-                            print("Input has to be an integer from 1 to 25.")
+                            print("Input has to be an integer.")
                 else:
                     print("Input cannot be empty.")
             else:
