@@ -1,12 +1,6 @@
 import string
 UPPER_ALPHABET, ALPHABET = [*string.ascii_uppercase], [*string.ascii_lowercase]
 
-def Sort(shift) -> str:
-    return ALPHABET[shift:] + ALPHABET[:shift]
-
-def Sortcap(shift) -> str:
-    return UPPER_ALPHABET[shift:] + UPPER_ALPHABET[:shift]
-
 def Encipher(ALPHABET, shifted, UPPER_ALPHABET, shifted_upper, user_input) -> str:
     output = ""
     #This find the position of k in ALPHABET/UPPER_ALPHABET then add the element with the same position as k in shifted/shifted_upper to output
@@ -46,7 +40,9 @@ def main(param) -> None:
             while run:
                 shift = input("Shift (type / to cancel): ")
                 if check(shift):
-                    eval(f'print("Output:", {param}(ALPHABET, Sort(int(shift) % 26), UPPER_ALPHABET, Sortcap(int(shift) % 26), user_input))')
+                    shifted =  ALPHABET[int(shift) % 26:] + ALPHABET[:int(shift) % 26]
+                    shifted_upper = UPPER_ALPHABET[int(shift) % 26:] + UPPER_ALPHABET[:int(shift) % 26]
+                    eval(f'print("Output:", {param}(ALPHABET, shifted, UPPER_ALPHABET, shifted_upper, user_input))')
                 elif shift == "/":
                     run = False
                 else:
