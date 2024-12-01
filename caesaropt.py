@@ -34,19 +34,18 @@ def main(param) -> None:
     run = True
     while run:
         user_input = [*input("Your input: ").strip()]
-        if not user_input:
-            print("Input cannot be empty.")
-            continue
-        while run:
+        while user_input:
             shift = input("Shift (type / to cancel): ")
             if check(shift):
                 shifted =  ALPHABET[int(shift) % 26:] + ALPHABET[:int(shift) % 26]
                 shifted_upper = UPPER_ALPHABET[int(shift) % 26:] + UPPER_ALPHABET[:int(shift) % 26]
-                eval(f'print("Output:", {param}(ALPHABET, shifted, UPPER_ALPHABET, shifted_upper, user_input))')
+                eval(f"print(\"Output:\", {param}(ALPHABET, shifted, UPPER_ALPHABET, shifted_upper, user_input))")
             elif shift == "/":
                 run = False
             else:
                 print("Input has to be an integer.")
+        else:
+            print("Input cannot be empty.")
 
 while True:
     cmd = input("Type E for Enciphering, type D for Deciphering (case insensitive). Type / to end the program: ")
