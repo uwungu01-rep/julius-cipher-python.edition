@@ -34,19 +34,21 @@ while True:
         if not user_input:
             print("Input cannot be empty.")
             continue
-        while run:
-            shift = input("Shift (type / to cancel): ")
-            if IsInt(shift) and (cmd == "e" or cmd == "E"):
-                shift = int(shift)
-                shifted =  ALPHABET[shift % 26:] + ALPHABET[:shift % 26]
-                shifted_upper = ALPHABET_UPPER[shift % 26:] + ALPHABET_UPPER[:shift % 26]
-                print(f"Output: {Caesar(ALPHABET, shifted, ALPHABET_UPPER, shifted_upper, user_input)}")
-            elif IsInt(shift) and (cmd == "d" or cmd == "D"):
-                shift = -int(shift)
-                shifted =  ALPHABET[shift % 26:] + ALPHABET[:shift % 26]
-                shifted_upper = ALPHABET_UPPER[shift % 26:] + ALPHABET_UPPER[:shift % 26]
-                print(f"Output: {Caesar(ALPHABET, shifted, ALPHABET_UPPER, shifted_upper, user_input)}")
-            elif shift == "/":
-                run = False
-            else:
-                print("Input has to be an integer.")
+        break
+    
+    while run:
+        shift = input("Shift (type / to cancel): ")
+        if IsInt(shift) and (cmd == "e" or cmd == "E"):
+            shift = int(shift)
+            shifted =  ALPHABET[shift % 26:] + ALPHABET[:shift % 26]
+            shifted_upper = ALPHABET_UPPER[shift % 26:] + ALPHABET_UPPER[:shift % 26]
+            print(f"Output: {Caesar(ALPHABET, shifted, ALPHABET_UPPER, shifted_upper, user_input)}")
+        elif IsInt(shift) and (cmd == "d" or cmd == "D"):
+            shift = -int(shift)
+            shifted =  ALPHABET[shift % 26:] + ALPHABET[:shift % 26]
+            shifted_upper = ALPHABET_UPPER[shift % 26:] + ALPHABET_UPPER[:shift % 26]
+            print(f"Output: {Caesar(ALPHABET, shifted, ALPHABET_UPPER, shifted_upper, user_input)}")
+        elif shift == "/":
+            run = False
+        else:
+            print("Input has to be an integer.")
