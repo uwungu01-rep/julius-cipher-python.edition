@@ -22,21 +22,20 @@ def IsInt(inp):
 
 while True:
     cmd = input("Type E for Enciphering, type D for Deciphering (case insensitive). Type / to end the program: ")
-    run = True
     if cmd == "/":
         exit(0)
     elif cmd not in COMMAND:
         print("Invalid command.")
         continue
 
-    while run:
+    while True:
         user_input = [*input("Your input: ").strip()]
         if not user_input:
             print("Input cannot be empty.")
             continue
         break
     
-    while run:
+    while True:
         shift = input("Shift (type / to cancel): ")
         if IsInt(shift) and (cmd == "e" or cmd == "E"):
             shift = int(shift)
@@ -49,6 +48,6 @@ while True:
             shifted_upper = ALPHABET_UPPER[shift % 26:] + ALPHABET_UPPER[:shift % 26]
             print(f"Output: {Caesar(ALPHABET, shifted, ALPHABET_UPPER, shifted_upper, user_input)}")
         elif shift == "/":
-            run = False
+            break
         else:
             print("Input has to be an integer.")
