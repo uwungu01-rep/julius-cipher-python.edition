@@ -24,7 +24,7 @@ while True:
     cmd = input("Type E for Enciphering, type D for Deciphering (case insensitive). Type / to end the program: ")
     if cmd == "/":
         exit(0)
-    elif cmd not in COMMAND or len(cmd) != 1:
+    elif cmd not in COMMAND:
         print("Invalid command.")
         continue
 
