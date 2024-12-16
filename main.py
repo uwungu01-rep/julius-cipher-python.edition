@@ -24,7 +24,7 @@ while True:
     cmd = input("Type E for Enciphering, type D for Deciphering (case insensitive). Type / to end the program: ")
     if cmd == "/":
         exit(0)
-    elif cmd not in COMMAND:
+    elif cmd not in COMMAND or len(cmd) != 1:
         print("Invalid command.")
         continue
 
@@ -32,8 +32,8 @@ while True:
         user_input = [*input("Your input: ").strip()]
         if not user_input:
             print("Input cannot be empty.")
-            continue
-        break
+        else:
+            break
     
     while True:
         shift = input("Shift (type / to cancel): ")
