@@ -1,5 +1,5 @@
 import string
-from os import system
+from os import system, remove
 import tkinter
 import tkinter.filedialog
 
@@ -10,7 +10,7 @@ FILETYPES = [("All files", "*.*")]
 ALPHABET, ALPHABET_UPPER = [*string.ascii_lowercase], [*string.ascii_uppercase]
 COMMAND = [*"12"]
 
-def check(arg1, arg2):
+def check(arg1, arg2) -> bool:
     for k in arg1:
         if k in arg2:
             return True
@@ -27,9 +27,10 @@ def Caesar(ALPHABET, shifted, ALPHABET_UPPER, shifted_upper, user_input) -> str:
             output += k
     return output
 
-def fileProcessor(file_name, ALPHABET, shifted, ALPHABET_UPPER, shifted_upper) -> str:
-    with open(file_name) as data:
-        return Caesar(ALPHABET, shifted, ALPHABET_UPPER, shifted_upper, data.read())
+def fileProcessor(file_name, ALPHABET, shifted, ALPHABET_UPPER, shifted_upper, output_file) -> None:
+    with open(file_name, encoding="latin-1") as data:
+        with open(output_file, "w", encoding="latin-1") as out:
+            out.write(Caesar(ALPHABET, shifted, ALPHABET_UPPER, shifted_upper, data.read()))
 
 def IsInt(inp) -> bool:
     try:
@@ -49,11 +50,11 @@ Your input: """).strip()
             exit(0)
         elif len(cmd) == 0:
             system("cls")
-            print("Invalid input: Empty input.")
+            print("Invalid input: Empty input. \n")
             continue
         elif cmd not in COMMAND:
             system("cls")
-            print("Invalid input: Command does not exist.")
+            print("Invalid input: Command does not exist. \n")
             continue
         
         system("cls")
@@ -123,14 +124,12 @@ Your input: """)
                     shift = int(shift)
                     shifted =  ALPHABET[shift % 26:] + ALPHABET[:shift % 26]
                     shifted_upper = ALPHABET_UPPER[shift % 26:] + ALPHABET_UPPER[:shift % 26]
-                    with open(output_file, "w") as out:
-                        out.write(fileProcessor(input_file, ALPHABET, shifted, ALPHABET_UPPER, shifted_upper))
+                    fileProcessor(input_file, ALPHABET, shifted, ALPHABET_UPPER, shifted_upper, output_file)
                 elif IsInt(shift) and cmd == "2":
                     shift = -int(shift)
                     shifted =  ALPHABET[shift % 26:] + ALPHABET[:shift % 26]
                     shifted_upper = ALPHABET_UPPER[shift % 26:] + ALPHABET_UPPER[:shift % 26]
-                    with open(output_file, "w") as out:
-                        out.write(fileProcessor(input_file, ALPHABET, shifted, ALPHABET_UPPER, shifted_upper))
+                    fileProcessor(input_file, ALPHABET, shifted, ALPHABET_UPPER, shifted_upper, output_file)
                 elif shift == "/":
                     system("cls")
                     break
