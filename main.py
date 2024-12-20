@@ -28,9 +28,14 @@ def Caesar(ALPHABET, shifted, ALPHABET_UPPER, shifted_upper, user_input) -> str:
     return output
 
 def fileProcessor(file_name, ALPHABET, shifted, ALPHABET_UPPER, shifted_upper, output_file) -> None:
-    with open(file_name, encoding="latin-1") as data:
-        with open(output_file, "w", encoding="latin-1") as out:
-            out.write(Caesar(ALPHABET, shifted, ALPHABET_UPPER, shifted_upper, data.read()))
+    try:
+        with open(file_name, encoding="latin-1") as data:
+            with open(output_file, "w", encoding="latin-1") as out:
+                out.write(Caesar(ALPHABET, shifted, ALPHABET_UPPER, shifted_upper, data.read()))
+    except UnicodeDecodeError:
+        with open(file_name, encoding="utf-8") as data:
+            with open(output_file, "w", encoding="utf-8") as out:
+                out.write(Caesar(ALPHABET, shifted, ALPHABET_UPPER, shifted_upper, data.read()))
 
 def IsInt(inp) -> bool:
     try:
@@ -96,13 +101,9 @@ Your input: """)
 
         elif mode == "2":
             system("cls")
-            while True:
-                input_file = tkinter.filedialog.askopenfilename(title="Choose your input file", filetypes=FILETYPES)
-                if len(input_file) == 0:
-                    system("cls")
-                    print("Invalid input: Please select a file.")
-                else:
-                    break
+            input_file = tkinter.filedialog.askopenfilename(title="Choose your input file (cancel to go back to menu)", filetypes=FILETYPES)
+            if not input_file:
+                continue
 
             system("cls")
             while True:
