@@ -53,20 +53,20 @@ def main() -> None:
 Your input: """).strip()
         if cmd == "3":
             exit(0)
-        elif len(cmd) == 0:
+        elif not cmd:
             system("cls")
-            print("Invalid input: Empty input. \n")
+            print("Invalid input: Empty input.")
             continue
         elif cmd not in COMMAND:
             system("cls")
-            print("Invalid input: Command does not exist. \n")
+            print("Invalid input: Command does not exist.")
             continue
         
         system("cls")
         mode = input("""1. Input from keyboard.
 2. Input from file.
 3. Cancel. \n
-Your input: """)
+Your input: """).strip()
         if mode == "3":
             system("cls")
             continue
@@ -94,7 +94,7 @@ Your input: """)
                     print(f"Output: {Caesar(ALPHABET, shifted, ALPHABET_UPPER, shifted_upper, user_input)}")
                 elif shift == "/":
                     break
-                elif len(shift) == 0:
+                elif not shift:
                     print("Invalid input: Empty input.")
                 else:
                     print("Invalid input: Not an integer.")
@@ -111,7 +111,7 @@ Your input: """)
 (If the name does not contain an extension then the program will automatically add a .txt extension): """).strip()
                 if check(output_file, [*'\\/:*?"<>|']) and len(output_file) != 0:
                     print("Invalid input: Illegal file name (file name cannot contains \"\\/:*?\"<>|\").")
-                elif len(output_file) == 0:
+                elif not output_file:
                     output_file = "output.txt"
                     break
                 elif output_file[len(output_file) - 1] != "." or "." not in output_file:
@@ -134,7 +134,7 @@ Your input: """)
                 elif shift == "/":
                     system("cls")
                     break
-                elif len(shift) == 0:
+                elif not shift :
                     print("Invalid input: Empty input.")
                 else:
                     print("Invalid input: Not an integer.")
