@@ -1,5 +1,5 @@
 import string
-from os import system, remove
+from os import system
 import tkinter
 import tkinter.filedialog
 
@@ -29,12 +29,12 @@ def Caesar(ALPHABET, shifted, ALPHABET_UPPER, shifted_upper, user_input) -> str:
 
 def fileProcessor(file_name, ALPHABET, shifted, ALPHABET_UPPER, shifted_upper, output_file) -> None:
     try:
-        with open(file_name, encoding="latin-1") as data:
-            with open(output_file, "w", encoding="latin-1") as out:
-                out.write(Caesar(ALPHABET, shifted, ALPHABET_UPPER, shifted_upper, data.read()))
-    except UnicodeDecodeError:
         with open(file_name, encoding="utf-8") as data:
             with open(output_file, "w", encoding="utf-8") as out:
+                out.write(Caesar(ALPHABET, shifted, ALPHABET_UPPER, shifted_upper, data.read()))
+    except UnicodeDecodeError:
+        with open(file_name, encoding="latin-1") as data:
+            with open(output_file, "w", encoding="latin-1") as out:
                 out.write(Caesar(ALPHABET, shifted, ALPHABET_UPPER, shifted_upper, data.read()))
 
 def IsInt(inp) -> bool:
