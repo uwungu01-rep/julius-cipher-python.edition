@@ -40,8 +40,8 @@ def IsInt(inp) -> bool:
     except ValueError:
         return False
 
-def main():
-    system("cls")
+def main() -> None:
+    system("clear")
     while True:
         run = True
         cmd = input("""1. Enciphering.
@@ -49,37 +49,37 @@ def main():
 3. Exit.
 Your input: """).strip()
         if cmd == "3":
-            system("cls")
+            system("clear")
             exit(0)
         elif not cmd:
-            system("cls")
+            system("clear")
             print("Invalid input: Empty input. \n")
             continue
         elif cmd not in COMMAND:
-            system("cls")
+            system("clear")
             print("Invalid input: Command does not exist. \n")
             continue
         
-        system("cls")
+        system("clear")
         while run:
             mode = input("""1. Input from keyboard.
 2. Input from file.
 3. Cancel.
 Your input: """).strip()
             if mode == "3":
-                system("cls")
+                system("clear")
                 break
             elif mode == "2":
-                system("cls")
+                system("clear")
                 input_file = tkinter.filedialog.askopenfilename(title="Choose your input file (cancel to go back to menu)", filetypes=[("All files", "*.*")])
                 if not input_file:
                     return
             elif mode not in COMMAND:
-                system("cls")
+                system("clear")
                 print("Invalid input: Mode does not exist. \n")
                 continue
             
-            system("cls")
+            system("clear")
             while mode == "2" and run:
                 output_file = input("""Type the name of your output file, leave empty for the default name (output.txt)
 (If the name does not contain an extension then the program will automatically add a .txt extension): """).strip()
@@ -94,35 +94,35 @@ Your input: """).strip()
                     output_file += ".txt"
                     run = False
 
-            system("cls")
+            system("clear")
             while mode == "1" and run:
                 user_input = [*input("Your input: ").strip()]
                 if not user_input:
-                    system("cls")
+                    system("clear")
                     print("Invalid input: Empty input. \n")
                 else:
-                    system("cls")
+                    system("clear")
                     run = False
 
-        system("cls")
+        system("clear")
         while mode != "3":
             shift = input("Shift (type / to cancel): ").strip()
             if IsInt(shift) and mode == "1":
-                system("cls")
+                system("clear")
                 if cmd == "1": print(f"Output: {Caesar(user_input, int(shift))}")
                 elif cmd == "2": print(f"Output: {Caesar(user_input, -int(shift))}")
             elif IsInt(shift) and mode == "2":
-                system("cls")
+                system("clear")
                 if cmd == "1": fileProcessor(input_file, output_file, int(shift))
                 elif cmd == "2": fileProcessor(input_file, output_file, -int(shift))
             elif shift == "/":
-                system("cls")
+                system("clear")
                 break
             elif not shift:
-                system("cls")
+                system("clear")
                 print("Invalid input: Empty input. \n")
             else:
-                system("cls")
+                system("clear")
                 print("Invalid input: Not an integer. \n")
         
 if __name__ == "__main__":
