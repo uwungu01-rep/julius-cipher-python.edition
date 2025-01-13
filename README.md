@@ -3,7 +3,7 @@ A simple program use to Encipher/Decipher text to/from Caesar Cipher.
 And yes, there are more versions of this program from other programming languages.
 
 ## How this thing works
-1. It slices the alphabet from the index of shift then add the sliced part to the start of the alphabet
+1. It slices the alphabet from the index of shift then add the sliced part to the start of the alphabet.
 2. Find the index of every character in user input in the alphabet and append the character with the same index into the output. Add the character into the output if it doesn't exist in the alphabet.
 
 ## Functionalities
@@ -14,15 +14,11 @@ Encipher/Decipher text to/from Caesar Cipher. This have 2 modes:
 ## Installation
 1. Install Python 3.x from [here](https://www.python.org/downloads/). (Ignore if you already have Python 3.x installed)
 2. Open terminal, run:
-```
-pip install caesar_cipher_tool_pye_edition
-```
+```pip install caesar_cipher_tool_pye_edition```
 
 ## Usage
 1. Open terminal, run:
-```
-cct
-```
+```cct```
 
 ## Requirement(s)
 1.  Python 3.x
