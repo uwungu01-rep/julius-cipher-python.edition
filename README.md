@@ -14,11 +14,15 @@ Encipher/Decipher text to/from Caesar Cipher. This have 2 modes:
 ## Installation
 1. Install Python 3.x from [here](https://www.python.org/downloads/). (Ignore if you already have Python 3.x installed)
 2. Open terminal, run:
-```pip install caesar_cipher_tool_pye_edition```
+```
+pip install caesar_cipher_tool_pye_edition
+```
 
 ## Usage
 1. Open terminal, run:
-```cct```
+```
+cct
+```
 
 ## Requirement(s)
 1.  Python 3.x
