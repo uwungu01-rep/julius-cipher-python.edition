@@ -1,5 +1,5 @@
 import string
-from os import system
+from os import system, path
 from sys import platform
 import tkinter
 import tkinter.filedialog
@@ -101,6 +101,13 @@ Your input: """).strip()
                 elif output_file[len(output_file) - 1] != "." or "." not in output_file:
                     output_file += ".txt"
                     run = False
+            
+            while mode == "2":
+                clear()
+                output_folder = tkinter.filedialog.askdirectory(title="Choose your output folder")
+                if output_folder:
+                    output_dir = path.join(output_folder, output_file)
+                    break
 
             clear()
             while mode == "1" and run:
@@ -121,8 +128,8 @@ Your input: """).strip()
                 elif cmd == "2": print(f"Output: {Caesar(user_input, -int(shift))}")
             elif IsInt(shift) and mode == "2":
                 clear()
-                if cmd == "1": fileProcessor(input_file, output_file, int(shift))
-                elif cmd == "2": fileProcessor(input_file, output_file, -int(shift))
+                if cmd == "1": fileProcessor(input_file, output_dir, int(shift))
+                elif cmd == "2": fileProcessor(input_file, output_dir, -int(shift))
             elif shift == "/":
                 clear()
                 break
