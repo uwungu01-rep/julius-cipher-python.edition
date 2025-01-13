@@ -31,4 +31,4 @@ cct
 1. While the input from file mode support pretty much any file type, anything other than plain text files (*.txt,...) could cause the program to freeze up (e.g *.exe,...) so avoid inputting those.
 
 ## License
-This project is licensed under the GNU General Public License, check [LICENSE](LICENSE) for more details.
+This project is licensed under the GNU General Public License 3.0, check [LICENSE](LICENSE) for more details.
