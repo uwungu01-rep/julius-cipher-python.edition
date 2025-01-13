@@ -12,7 +12,7 @@ Encipher/Decipher text to/from Caesar Cipher. This have 2 modes:
 2. Input from file: Good for processing a large amount of text, result will be put into another file, you can input the file name you desire, or leave blank to use the default name (output.txt). You have to specify the directory for the output file in case you select this mode.
 
 ## Installation
-1. Install Python 3.x from [here](https://www.python.org/downloads/). (Ignore if you already have Python 3.x installed)
+1. Install Python 3.x from <a href="https://www.python.org/downloads/" target="_blank">here</a>. (Ignore if you already have Python 3.x installed)
 2. Open terminal, run:
 ```
 pip install caesar_cipher_tool_pye_edition
