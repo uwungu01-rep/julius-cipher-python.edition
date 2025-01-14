@@ -31,8 +31,9 @@ And then do:
 ```
 "main()"
 ```
-To use the program. <br/>
-3. Similarly, you can do:
+To use the program.
+
+Similarly, you can do:
 ```
 from caesar_cipher_tool_pye_edition.main import Caesar
 ```
