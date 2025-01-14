@@ -19,10 +19,15 @@ pip install caesar_cipher_tool_pye_edition
 ```
 
 ## Usage
-1. Open terminal, run:
+<ol type="1">
+  <li>
+    Open terminal, run:
 ```
 cct
 ```
+  </li>
+</ol>
+1. 
 2. Alternatively, in a Python file (*.py), you can do:
 ```
 from caesar_cipher_tool_pye_edition import main
