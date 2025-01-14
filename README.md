@@ -9,7 +9,7 @@ And yes, there are more versions of this program from other programming language
 ## Functionalities
 Encipher/Decipher text to/from Caesar Cipher. This have 2 modes:
 1. Input from keyboard: Good for inputting short texts and quickly Encipher/Decipher them.
-2. Input from file: Good for processing a large amount of text, result will be put into another file, you can input the file name you desire, or leave blank to use the default name (output.txt). You have to specify the directory for the output file in case you select this mode.
+2. Input from file: Good for processing a large amount of text, result will be put into another file. You can input the file name you desire, or leave blank to use the default name (output.txt). You have to specify the directory for the output file in case you select this mode.
 
 ## Installation
 <ol type="1">
