@@ -39,9 +39,6 @@ cct
     
 ```
 from caesar_cipher_tool_pye_edition import main
-```
-And then do:
-```
 main()
 ```
 To use the program.
