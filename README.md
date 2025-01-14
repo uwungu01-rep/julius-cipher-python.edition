@@ -23,7 +23,7 @@ pip install caesar_cipher_tool_pye_edition
 ```
 cct
 ```
-2. Alternatively, you can do:
+2. Alternatively, in a Python file (*.py), you can do:
 ```
 from caesar_cipher_tool_pye_edition import main
 ```
@@ -31,13 +31,13 @@ And then do:
 ```
 "main()"
 ```
-In a python file to use the program.
-4. Similarly, you can do:
+To use the program.
+3. Similarly, you can do:
 ```
 from caesar_cipher_tool_pye_edition.main import Caesar
 ```
 To use the ciphering function.
-(Syntax: Caesar({user_input}, {shift}) user_input = user input, shift = shift, enter minus shift in order to decipher texts to use the ciphering function.)
+(Syntax: Caesar({user_input}, {shift}) with user_input = user input, shift = shift, enter minus shift in order to decipher texts to use the ciphering function.)
 
 ## Requirement(s)
 1.  Python 3.x
