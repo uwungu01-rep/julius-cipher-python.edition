@@ -63,10 +63,7 @@ def main() -> None:
     clear()
     while True:
         run = True
-        cmd = input("""1. Enciphering.
-2. Deciphering. 
-3. Exit.
-Your input: """).strip()
+        cmd = input("1. Enciphering. \n2. Deciphering. \n3. Exit. \nYour input: ").strip()
         if cmd == "3":
             clear()
             exit(0)
@@ -81,10 +78,7 @@ Your input: """).strip()
         
         clear()
         while run:
-            mode = input("""1. Input from keyboard.
-2. Input from file.
-3. Cancel.
-Your input: """).strip()
+            mode = input("1. Input from keyboard. \n2. Input from file. \n3. Cancel. \nYour input: ").strip()
             if mode == "3":
                 clear()
                 break
