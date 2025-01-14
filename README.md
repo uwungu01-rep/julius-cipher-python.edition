@@ -32,12 +32,13 @@ And then do:
 main()
 ```
 To use the program.
-3. Similarly, you can do: 
+3. Similarly, you can do:
 ```
 from caesar_cipher_tool_pye_edition.main import Caesar
 ```
 To use the ciphering function.
 (Syntax: Caesar({user_input}, {shift}) with user_input = user input, shift = shift, enter minus shift in order to decipher texts to use the ciphering function.)
+
 
 ## Requirement(s)
 1.  Python 3.x
