@@ -9,13 +9,16 @@ root.withdraw()
 
 COMMAND = [*"12"]
 
-def check(arg1, arg2) -> bool:
+def check(arg1: str, arg2: str) -> bool:
     for k in arg1:
         if k in arg2:
             return True
     return False
 
-def Caesar(user_input, shift) -> str:
+def Caesar(user_input: str, shift: int) -> str:
+    """
+    Process texts. By default, this only encipher texts, input minus shift if you want to decipher texts
+    """
     output = ""
     ALPHABET, ALPHABET_UPPER = [*string.ascii_lowercase], [*string.ascii_uppercase]
     shifted =  ALPHABET[shift % 26:] + ALPHABET[:shift % 26]
@@ -29,18 +32,27 @@ def Caesar(user_input, shift) -> str:
             output += k
     return output
 
-def fileProcessor(file_name, output_file, shift) -> None:
+def fileProcessor(file_name: str, output_file: str, shift: int) -> None:
+    """
+    Process the file_name file and put it in output_file
+    """
     with open(file_name, encoding = "latin-1") as data:
         with open(output_file, "w", encoding = "latin-1") as out:
             out.write(Caesar(data.read(), shift))
 
 def clear():
+    """
+    Clear the terminal
+    """
     if platform == "win32":
         system("cls")
     else:
         system("clear")
 
-def IsInt(inp) -> bool:
+def IsInt(inp: str) -> bool:
+    """
+    Check if inp is an integer or not. Return True if yes, return False if not 
+    """
     try:
         int(inp)
         return True
