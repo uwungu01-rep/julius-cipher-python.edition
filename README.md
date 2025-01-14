@@ -1,4 +1,4 @@
-# Caesar Cipher Tool<sup>TM</sup> - Python Edition
+# Caesar Cipher Tool<sup><sup>TM</sup></sup> - Python Edition
 A simple program use to Encipher/Decipher text to/from Caesar Cipher.
 And yes, there are more versions of this program from other programming languages.
 
