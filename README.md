@@ -20,7 +20,7 @@ Encipher/Decipher text to/from Caesar Cipher. This have 2 modes:
     Open terminal, run:
     
 ```
-pip install caesar_cipher_tool_pye_edition
+pip install julius_cipher
 ```
   </li>
 </ol>
@@ -31,14 +31,14 @@ pip install caesar_cipher_tool_pye_edition
     Open terminal, run:
 
 ```
-cct
+caesar
 ```
   </li>
   <li>
     Alternatively, in a Python file (*.py), you can do:
     
 ```
-from caesar_cipher_tool_pye_edition import main
+from julius_cipher import main
 main()
 ```
 To use the program.
@@ -47,7 +47,7 @@ To use the program.
     Similarly, you can do:
     
 ```
-from caesar_cipher_tool_pye_edition.main import Caesar
+from julius_cipher.main import Caesar
 ```
 To use the ciphering function.
 (Syntax: Caesar({user_input}, {shift}) with user_input = user input, shift = shift, enter minus shift in order to decipher texts to use the ciphering function.)
