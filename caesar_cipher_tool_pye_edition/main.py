@@ -10,6 +10,9 @@ root.withdraw()
 COMMAND = [*"12"]
 
 def check(arg1: str, arg2: str) -> bool:
+    """
+    Check if any of arg1's element exist in arg2, use to determine if a file name is illegal or not
+    """
     for k in arg1:
         if k in arg2:
             return True
@@ -67,33 +70,29 @@ def main() -> None:
     while True:
         run = True
         cmd = input("1. Enciphering. \n2. Deciphering. \n3. Exit. \nYour input: ").strip()
+        clear()
         if cmd == "3":
             root.destroy()
             clear()
             exit(0)
         elif not cmd:
-            clear()
             print("Invalid input: Empty input. \n")
             continue
         elif cmd not in COMMAND:
-            clear()
             print("Invalid input: Command does not exist. \n")
             continue
         
-        clear()
         while run:
             mode = input("1. Input from keyboard. \n2. Input from file. \n3. Cancel. \nYour input: ").strip()
+            clear()
             if mode == "3":
-                clear()
                 break
             elif mode == "2":
-                clear()
                 input_file = tkinter.filedialog.askopenfilename(title="Choose your input file (cancel to go back to menu)", 
                                                                 filetypes=[("All files", "*.*")])
                 if not input_file:
                     return
             elif mode not in COMMAND:
-                clear()
                 print("Invalid input: Mode does not exist. \n")
                 continue
 
@@ -119,35 +118,29 @@ def main() -> None:
                     output_dir = path.join(output_folder, output_file)
                     break
 
-            clear()
             while mode == "1" and run:
                 user_input = [*input("Your input: ").strip()]
+                clear()
                 if not user_input:
-                    clear()
                     print("Invalid input: Empty input. \n")
                 else:
-                    clear()
                     run = False
 
         clear()
         while mode != "3":
             shift = input("Shift (type / to cancel): ").strip()
+            clear()
             if IsInt(shift) and mode == "1":
-                clear()
                 if cmd == "1": print(f"Output: {Caesar(user_input, int(shift))}")
                 elif cmd == "2": print(f"Output: {Caesar(user_input, -int(shift))}")
             elif IsInt(shift) and mode == "2":
-                clear()
                 if cmd == "1": fileProcessor(input_file, output_dir, int(shift))
                 elif cmd == "2": fileProcessor(input_file, output_dir, -int(shift))
             elif shift == "/":
-                clear()
                 break
             elif not shift:
-                clear()
                 print("Invalid input: Empty input. \n")
             else:
-                clear()
                 print("Invalid input: Not an integer. \n")
         
 if __name__ == "__main__":
