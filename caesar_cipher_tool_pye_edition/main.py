@@ -60,11 +60,15 @@ def IsInt(inp: str) -> bool:
         return False
 
 def main() -> None:
+    """
+    The main function
+    """
     clear()
     while True:
         run = True
         cmd = input("1. Enciphering. \n2. Deciphering. \n3. Exit. \nYour input: ").strip()
         if cmd == "3":
+            root.destroy()
             clear()
             exit(0)
         elif not cmd:
