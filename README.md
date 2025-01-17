@@ -50,7 +50,7 @@ To use the program.
 from julius_cipher.main import Caesar
 ```
 To use the ciphering function.
-(Syntax: Caesar({user_input}, {shift}) with user_input = user input, shift = shift, enter minus shift in order to decipher texts to use the ciphering function.)
+(Syntax: Caesar({user_input}, {shift}) with user_input = user input, shift = shift, enter minus shift in order to decipher texts in the.)
   </li>
 </ol>
 
