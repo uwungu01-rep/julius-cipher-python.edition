@@ -68,7 +68,8 @@ def main() -> None:
     """
     clear()
     while True:
-        run = True
+        run = False
+        count = 0
         cmd = input("1. Enciphering. \n2. Deciphering. \n3. Exit. \nYour input: ").strip()
         clear()
         if cmd == "3":
@@ -82,52 +83,54 @@ def main() -> None:
             print("Invalid input: Command does not exist. \n")
             continue
         
-        while run:
+        while True:
             mode = input("1. Input from keyboard. \n2. Input from file. \n3. Cancel. \nYour input: ").strip()
             clear()
-            if mode == "3":
-                break
-            elif mode == "2":
+            if mode == "2":
                 input_file = tkinter.filedialog.askopenfilename(title="Choose your input file (cancel to go back to menu)", 
                                                                 filetypes=[("All files", "*.*")])
                 if not input_file:
-                    return
+                    break
             elif mode not in COMMAND:
                 print("Invalid input: Mode does not exist. \n")
                 continue
 
-            clear()
-            while mode == "2" and run:
-                output_file = input("""Type the name of your output file, leave empty for the default name (output.txt)
+            break
+
+        while mode == "2" and input_file:
+            output_file = input("""Type the name of your output file, leave empty for the default name (output.txt)
 (If the name does not contain an extension then the program will automatically add a .txt extension): """).strip()
-                if check(output_file, [*'\\/:*?"<>|']) and not output_file:
-                    print("Invalid input: Illegal file name (file name cannot contains \"\\/:*?\"<>|\"). \n")
-                elif output_file == input_file:
-                    print("Invalid input: Output file cannot be the same name as input file. \n")
-                elif not output_file:
-                    output_file = "output.txt"
-                    run = False
-                elif output_file[len(output_file) - 1] != "." or "." not in output_file:
-                    output_file += ".txt"
-                    run = False
-            
-            while mode == "2":
-                clear()
-                output_folder = tkinter.filedialog.askdirectory(title="Choose your output folder")
-                if output_folder:
-                    output_dir = path.join(output_folder, output_file)
-                    break
+            clear()
+            if check(output_file, [*'\\/:*?"<>|']) and not output_file:
+                print("Invalid input: Illegal file name (file name cannot contains \"\\/:*?\"<>|\"). \n")
+            elif output_file == input_file:
+                print("Invalid input: Output file cannot be the same name as input file. \n")
+            elif not output_file:
+                output_file = "output.txt"
+                run = True
+                break
+            elif output_file[len(output_file) - 1] != "." or "." not in output_file:
+                output_file += ".txt"
+                run = True
+                break
+        
+        while mode == "2" and input_file:
+            output_folder = tkinter.filedialog.askdirectory(title="Choose your output folder")
+            if output_folder:
+                output_dir = path.join(output_folder, output_file)
+                break
 
-            while mode == "1" and run:
-                user_input = [*input("Your input: ").strip()]
-                clear()
-                if not user_input:
-                    print("Invalid input: Empty input. \n")
-                else:
-                    run = False
+        while mode == "1":
+            user_input = [*input("Your input: ").strip()]
+            clear()
+            if not user_input:
+                print("Invalid input: Empty input. \n")
+            else:
+                run = True
+                break
 
-        clear()
-        while mode != "3":
+        while mode != "3" and run:
+            print(f"Input: {"".join(user_input)}")
             shift = input("Shift (type / to cancel): ").strip()
             clear()
             if IsInt(shift) and mode == "1":
@@ -144,5 +147,4 @@ def main() -> None:
                 print("Invalid input: Not an integer. \n")
         
 if __name__ == "__main__":
-    while True:
-        main()
+    main()
