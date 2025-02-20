@@ -37,7 +37,7 @@ caesar
   <li>
     Alternatively, in a Python file (*.py), you can do:
     
-```
+```python
 from julius_cipher import main
 main()
 ```
@@ -46,7 +46,7 @@ To use the program.
   <li>
     Similarly, you can do:
     
-```
+```python
 from julius_cipher.main import Caesar
 ```
 To use the ciphering function.
