@@ -38,11 +38,15 @@ To use the program.
     Similarly, you can do:
     
 ```python
+<<<<<<< HEAD
 from julius_cipher import Caesar
 ```
 Or:
 ```python
 from julius_cipher import Vigenere
+=======
+from julius_cipher.main import Caesar
+>>>>>>> b680a6002ac55c8156d31260f848d5ea36990603
 ```
 To use the ciphering functions.
   </li>
