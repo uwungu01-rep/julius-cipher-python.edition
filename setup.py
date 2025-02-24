@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = "3.6"
+VERSION = "4.0"
 DESCRIPTION = "A simple command line program use to encipher/decipher text to/from Caesar Cipher."
 with open("readme.md") as file:
     LONG_DESCRIPTION = file.read()
@@ -15,8 +15,7 @@ setup(
     long_description_content_type = "text/markdown",
     url = "https://github.com/uwungu01-rep/caesar-cipher-tool-python.edition",
     packages = find_packages(),
-    install_requires = [], # add any additional packages that 
-    # needs to be installed along with your package. Eg: "caer"
+    install_requires = ["ziz_utils"],
     classifiers = [
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",

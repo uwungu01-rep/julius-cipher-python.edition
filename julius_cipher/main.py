@@ -1,26 +1,15 @@
-import string
-from os import system, path
-from sys import platform
-import tkinter
-import tkinter.filedialog
-
-root = tkinter.Tk()
-root.withdraw()
-
-COMMAND = [*"12"]
-
-def check(arg1: str, arg2: str) -> bool:
-    """
-    Check if any of arg1's element exist in arg2, use to determine if a file name is illegal or not
-    """
-    for k in arg1:
-        if k in arg2:
-            return True
-    return False
+from os import path, makedirs
+import tkinter, tkinter.filedialog, string, json
+import ziz_utils
 
 def Caesar(user_input: str, shift: int) -> str:
     """
-    Process texts. By default, this only encipher texts, input minus shift if you want to decipher texts
+    Process texts into Caesar Cipher. By default, this only encipher texts, input minus shift if you want to decipher texts.
+    
+    :type input: str
+    :param input: The text you want to process.
+    :type shift: int
+    :param shift: The text you want to process.
     """
     output = ""
     ALPHABET, ALPHABET_UPPER = [*string.ascii_lowercase], [*string.ascii_uppercase]
@@ -35,116 +24,287 @@ def Caesar(user_input: str, shift: int) -> str:
             output += k
     return output
 
-def fileProcessor(file_name: str, output_file: str, shift: int) -> None:
+def Vigenere(user_input: str, key: str, decipher_mode: bool = False) -> str:
     """
-    Process the file_name file and put it in output_file
-    """
-    with open(file_name, encoding = "latin-1") as data:
-        with open(output_file, "w", encoding = "latin-1") as out:
-            out.write(Caesar(data.read(), shift))
+    Process texts into Vigenere Cipher.
 
-def clear():
+    :type input: str
+    :param input: The text you want to process.
+    :type key: str
+    :param key: A Vigenere Cipher's key. It is practically impossible to crack Vigenere Cipher without this.
+    :type decipher_mode: bool
+    :param decipher_mode: Choose to decipher instead of encipher. Default is False.
     """
-    Clear the terminal
-    """
-    if platform == "win32":
-        system("cls")
-    else:
-        system("clear")
+    char_map = {i: char for i, char in enumerate(user_input) if char not in string.ascii_letters}
+    user_input = "".join([x for x in user_input if x in string.ascii_letters])
+    while len(key) != len(user_input):
+        if len(key) > len(user_input):
+            key = key[:len(user_input):]
+        elif len(key) < len(user_input):
+            key = key * 2
 
-def IsInt(inp: str) -> bool:
-    """
-    Check if inp is an integer or not. Return True if yes, return False if not 
-    """
-    try:
-        int(inp)
-        return True
-    except ValueError:
-        return False
+    ALPHABET = string.ascii_lowercase
+    UPPER_ALPHABET = string.ascii_uppercase
+    output = []
+    for i, char in enumerate(user_input):
+        shift = ALPHABET.index(key[i])
+
+        if char.islower():
+            alphabet = ALPHABET
+        else:
+            alphabet = UPPER_ALPHABET
+
+        if not decipher_mode:
+            ciphered = alphabet[(alphabet.index(char) + shift) % len(alphabet)]
+        else:
+            ciphered = alphabet[(alphabet.index(char) - shift) % len(alphabet)]
+        
+        output.append(ciphered)
+    
+    for i, j in char_map.items():
+        output.insert(i, j)
+    
+    return "".join(output)
 
 def main() -> None:
     """
     The main function
     """
-    clear()
+    root = tkinter.Tk()
+    root.withdraw()
+    root.attributes("-topmost", True)
+    
+    config_file_name = "config.json"
+    config_folder = path.join(path.expanduser("~"), "caesar_config")
+    config_path = path.join(config_folder, config_file_name)
+
+    illegal_chars = [*r'\/:*?"<>|']
+    ciphering_schemes = ["Caesar", "Vigenere"]
+    def_config = {
+        "mode": "Caesar",
+        "output_path": "",
+        "output_file_name": "output.txt"
+    }
+
+    makedirs(config_folder, exist_ok=True)
+    ziz_utils.config_manager(def_config, config_folder, config_file_name)
+
+    with open(config_path) as file:
+        config = json.load(file)
+    
+    if config["output_path"] == "":
+        output_folder = tkinter.filedialog.askdirectory(title="Choose your output folder (Cancel to quit)")
+        if not output_folder:
+            return
+        with open(config_path, "w") as file:
+            config["output_path"] = output_folder
+            json.dump(config, file, ensure_ascii = False, indent = 4)
+    
+    ziz_utils.clear()
     while True:
-        run = False
-        count = 0
-        cmd = input("1. Enciphering. \n2. Deciphering. \n3. Exit. \nYour input: ").strip()
-        clear()
-        if cmd == "3":
-            root.destroy()
-            clear()
-            exit(0)
-        elif not cmd:
+        mode = 0
+        cmd = input("1. Enciphering. \n2. Deciphering. \n3. Settings. \n4. Exit. \nYour input: ").strip()
+        ziz_utils.clear()
+
+        if not cmd:
             print("Invalid input: Empty input. \n")
             continue
-        elif cmd not in COMMAND:
+        elif cmd not in [*"1234"]:
             print("Invalid input: Command does not exist. \n")
             continue
-        
-        while True:
-            mode = input("1. Input from keyboard. \n2. Input from file. \n3. Cancel. \nYour input: ").strip()
-            clear()
-            if mode == "2":
-                input_file = tkinter.filedialog.askopenfilename(title="Choose your input file (cancel to go back to menu)", 
-                                                                filetypes=[("All files", "*.*")])
-                if not input_file:
-                    break
-            elif mode not in COMMAND:
-                print("Invalid input: Mode does not exist. \n")
-                continue
+        elif cmd == "4":
+            root.destroy()
+            exit(0)
 
+        while cmd == "3":
+            option = input(f"""1. Choose ciphering scheme.
+2. Set output folder.
+3. Set output file name.
+4. Go back.
+5. Reset config to default.
+Your input: """).strip()
+            ziz_utils.clear()
+
+            match option:
+                case "4":
+                    break
+                case "2":
+                    output_folder = tkinter.filedialog.askdirectory(title="Choose your output folder")
+                    if output_folder:
+                        config["output_folder"] = output_folder
+                        ziz_utils.write_config(def_config, config, config_folder, config_file_name)
+                        print("Success. \n")
+                    else:
+                        print("Cancelled. \n")
+                case "5":
+                    while True:
+                        confirm = input("Do you wish to reset the config to default? [Y/N]: ").strip()
+                        ziz_utils.clear()
+
+                        if confirm.lower() == "y":
+                            config = def_config
+                            output_folder = tkinter.filedialog.askdirectory(title="Choose your output folder (Cancel to quit)")
+                            if output_folder == "":
+                                return
+                            
+                            config["output_folder"] = output_folder
+                            ziz_utils.write_config(def_config, config, config_folder, config_file_name)
+                        elif confirm.lower() == "n":
+                            break
+                        else:
+                            print("Invalid input: Option does not exist.\n")
+                    continue
+                case "1":
+                    options = [str(x) for x in range(1, len(ciphering_schemes) + 2)]
+                    while True:
+                        print(f"Current ciphering scheme: {config["mode"]}.")
+                        option = input(f"""{ziz_utils.menu(ciphering_schemes)}
+3. Go back.
+Your input: """).strip()
+                        ziz_utils.clear()
+
+                        if option not in options:
+                            print("Invalid input: Option does not exist. \n")
+                            continue
+                        elif option == "3":
+                            break
+                        
+                        config["mode"] = ciphering_schemes[int(option) - 1]
+                        ziz_utils.write_config(def_config, config, config_folder, config_file_name)
+                case "3":
+                    while True:
+                        output_file_name = input("""Type the name of your output file, leave empty to cancel.
+(If the name does not contain an extension then the program will automatically add a .txt extension): """).strip()
+                        ziz_utils.clear()
+
+                        if not output_file_name:
+                            print("Cancelled. \n")
+                            break
+                        elif any(char in output_file for char in illegal_chars):
+                            print("Invalid input: File name contains illegal character(s). \n")
+                            continue
+                        elif "." not in output_file:
+                            output_file += ".txt"
+                        elif output_file.endswith("."):
+                            output_file += "txt"
+                        config["output_file_name"] = output_file_name
+                        ziz_utils.write_config(def_config, config, config_folder, config_file_name)
+                        print(f'Successful. Output file is now "{output_file_name}". \n')
+                case _:
+                    print("Invalid input: Option does not exist. \n")
+
+        while cmd != "3":
+            mode = input("1. Input from keyboard. \n2. Input from file. \n3. Cancel. \nYour input: ").strip()
+            ziz_utils.clear()
+
+            if not mode:
+                print("Invalid input: Empty input. \n")
+            elif mode not in [*"123"]:
+                print("Invalid input: Option does not exist. \n")
+            else:
+                break
+            
+        while mode == "1":
+            user_input = input("Your input: ").strip()
+            ziz_utils.clear()
+            temp = ["Shift", "Key"]
+
+            while True:
+                match config["mode"]:
+                    case "Caesar":
+                        shift = input("Shift (Enter / to go back): ").strip()
+                        ziz_utils.clear()
+
+                        if shift == "/":
+                            break
+                        elif not shift:
+                            print("Invalid input: Empty input. \n")
+                            continue
+                        elif ziz_utils.isInt(shift) and shift != "/" and not shift:
+                            print("Invalid input: Input has to be an integer. \n")
+                            continue
+                    case "Vigenere":
+                        shift = input("Key (Enter / to go back): ")
+                        ziz_utils.clear()
+
+                        if shift == "/":
+                            break
+                        elif not shift:
+                            print("Invalid input: Empty input. \n")
+                            continue
+                        elif any(char not in string.ascii_letters for char in shift):
+                            print("Invalid input: Input cannot contain non-alphabetical character(s). \n")
+                            continue
+        
+                match config["mode"]:
+                    case "Caesar":
+                        if cmd == "1":
+                            content = Caesar(user_input, int(shift))
+                        elif cmd == "2":
+                            content = Caesar(user_input, -int(shift))
+                    case "Vigenere":
+                        if cmd == "1":
+                            content = Vigenere(user_input, shift)
+                        elif cmd == "2":
+                            content = Vigenere(user_input, shift, True)
+                
+                print(f"""Input: {user_input}")
+{temp[ciphering_schemes.index(config["mode"])]}: {shift}")
+"Result: {content} \n""")
             break
 
-        while mode == "2" and input_file:
-            output_file = input("""Type the name of your output file, leave empty for the default name (output.txt)
-(If the name does not contain an extension then the program will automatically add a .txt extension): """).strip()
-            clear()
-            if check(output_file, [*'\\/:*?"<>|']) and not output_file:
-                print("Invalid input: Illegal file name (file name cannot contains \"\\/:*?\"<>|\"). \n")
-            elif output_file == input_file:
-                print("Invalid input: Output file cannot be the same name as input file. \n")
-            elif not output_file:
-                output_file = "output.txt"
-                run = True
+        while mode == "2":
+            input_file = tkinter.filedialog.askopenfilename(title="Choose your input file (cancel to go back to main menu)", 
+                                                            filetypes=[("All files", "*.*")])
+            if not input_file:
                 break
-            elif output_file[len(output_file) - 1] != "." or "." not in output_file:
-                output_file += ".txt"
-                run = True
-                break
-        
-        while mode == "2" and input_file:
-            output_folder = tkinter.filedialog.askdirectory(title="Choose your output folder")
-            if output_folder:
-                output_dir = path.join(output_folder, output_file)
-                break
+            
+            while True:
+                match config["mode"]:
+                    case "Caesar":
+                        shift = input("Shift (Enter / to go back): ").strip()
+                        ziz_utils.clear()
+                        
+                        if shift == "/":
+                            break
+                        elif not shift:
+                            print("Invalid input: Empty input. \n")
+                            continue
+                        elif ziz_utils.isInt(shift) and shift != "/" and not shift:
+                            print("Invalid input: Input has to be an integer. \n")
+                            continue
+                    case "Vigenere":
+                        shift = input("Key (Enter / to go back): ")
+                        ziz_utils.clear()
 
-        while mode == "1":
-            user_input = [*input("Your input: ").strip()]
-            clear()
-            if not user_input:
-                print("Invalid input: Empty input. \n")
-            else:
-                run = True
-                break
+                        if shift == "/":
+                            break
+                        elif not shift:
+                            print("Invalid input: Empty input. \n")
+                            continue
+                        elif any(char not in string.ascii_letters for char in shift):
+                            print("Invalid input: Input cannot contain non-alphabetical character(s). \n")
+                            continue
+                
+                with open(input_file) as file:
+                    user_input = file.read()
 
-        while mode != "3" and run:
-            print(f"Input: {"".join(user_input)}")
-            shift = input("Shift (type / to cancel): ").strip()
-            clear()
-            if IsInt(shift) and mode == "1":
-                if cmd == "1": print(f"Output: {Caesar(user_input, int(shift))}")
-                elif cmd == "2": print(f"Output: {Caesar(user_input, -int(shift))}")
-            elif IsInt(shift) and mode == "2":
-                if cmd == "1": fileProcessor(input_file, output_dir, int(shift))
-                elif cmd == "2": fileProcessor(input_file, output_dir, -int(shift))
-            elif shift == "/":
-                break
-            elif not shift:
-                print("Invalid input: Empty input. \n")
-            else:
-                print("Invalid input: Not an integer. \n")
-        
+                match config["mode"]:
+                    case "Caesar":
+                        if cmd == "1":
+                            content = Caesar(user_input, int(shift))
+                        elif cmd == "2":
+                            content = Caesar(user_input, -int(shift))
+                    case "Vigenere":
+                        if cmd == "1":
+                            content = Vigenere(user_input, shift)
+                        elif cmd == "2":
+                            content = Vigenere(user_input, shift, True)
+
+                with open(path.join(config["output_path"], config["output_file_name"]), "w") as file:
+                    file.write(content)
+                print(f"Success. Content write to {config["output_path"]}.")
+            break
+
 if __name__ == "__main__":
     main()
