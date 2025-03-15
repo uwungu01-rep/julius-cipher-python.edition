@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = "4.0"
+VERSION = "4.1.0"
 DESCRIPTION = "A simple command line program use to encipher/decipher text to/from Caesar Cipher."
 with open("readme.md") as file:
     LONG_DESCRIPTION = file.read()
